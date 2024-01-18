@@ -1,0 +1,69 @@
+﻿curl -u javadoc-amy:uytRn78Y0Uyi# -X POST -H 'Content-Type: application/json' -d'{"type":"page","title":"new page","space":{"key":"JCJS"},"body":{"storage":{"value":"<p>This is a new page</p>","representation":"storage"}}}' http://localhost:8999/rest/api/content/
+
+curl -u javadoc-amy:uytRn78Y0Uyi# -X POST -H 'Content-Type: application/json' -d'{"type":"page","title":"new pagetest", "ancestors":[{"id":2883867}], "space":{"key":"JCJS"},"body":{"storage":{"value":"<p>This is a new page</p>","representation":"storage"}}}' http://localhost:8999/rest/api/content/
+
+
+
+curl -u javadoc-amy:uytRn78Y0Uyi# http://localhost:8999/rest/api/content/1606042?expand=body.storage
+
+curl -u javadoc-amy:uytRn78Y0Uyi# "http://localhost:8999/rest/api/content?title=%E8%8E%B7%E5%8F%96SEO&spaceKey=JCJS&expand=history,version,ancestors"
+
+更新：
+curl -u javadoc-amy:uytRn78Y0Uyi# -X PUT -H 'Content-Type: application/json' -d'{"type":"page","title":"new page","ancestors":[{"id":950294}],"space":{"key":"JCJS"},"body":{"storage":{"value":"<p>This is the updated text for the new page</p>","representation":"storage"}},"version":{"number":3},"id":"2883694"}' http://localhost:8999/rest/api/content/2883694
+
+curl -u javadoc-amy:uytRn78Y0Uyi# -X POST -H 'Content-Type: application/json' -d'{"type":"page","title":"new page","ancestors":[{"id":950294}],"space":{"key":"JCJS"},"body":{"storage":{"value":"<p>This is the updated text for the new page22</p>","representation":"storage"}},"version":{"number":4},"id":"2883694"}' http://localhost:8999/rest/api/content/2883694
+
+
+
+接口@title注释不要轻易改：
+
+
+
+1生成每个接口的 page内容和 title
+形成树形结构：
+-- service1
+  -- method1
+  -- method1
+-- service2
+  -- method2
+  。。。
+
+
+PreparedServicePage
+ title
+ content
+ serviceName
+ bool pageAlreadyExist false 表示该title不存在，需要插入，true表示存在需要更新
+ ConfluencePageInfo 按title查找在Confluence里的页面数据
+ list<PreparedMethodPage> subPages
+ parentPage 其实只需要id
+
+PreparedMethodPage
+ title
+ content
+ serviceName
+ methodName  
+ bool pageAlreadyExist false 表示该title不存在，需要插入，true表示存在需要更新
+ ConfluencePageInfo 按title查找在Confluence里的页面数据
+ parentPage 其实只需要id
+
+
+泛型怎么处理：
+
+组装好 List<PreparedServicePage> servicePages：
+  javadoc-生成json
+  解析json 生成servicePages
+ 
+遍历这个2层树：
+检查在Confluence里是否已存在page，拼装数据
+
+遍历这个2层树：
+service 若存在已有页面（pageAlreadyExist=true） 那么 parentPage id 必须与配置的confluenceParentId 相同 否则抛错
+
+method ：1,父service页面存在时， method 的页面若存在，parentPage id 必须父service的id相同 否则抛错
+         2,父service页面不存在时，method 若页面存在，抛错
+
+
+遍历这个2层树：
+若存在已有页面，且内容不相同，更新内容
+若不存在，插入页面（先插入service页面，method页面是其子页面）

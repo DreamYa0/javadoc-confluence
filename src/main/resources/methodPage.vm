@@ -1,0 +1,245 @@
+#if(!$method.deprecated.equals(""))
+    #if($method.deprecated.equals("true"))
+    <h2 class="wiki-content">
+    <span style="color:#008080;">
+        <span style="color:#3366FF;"><span style="color:#666699;"></span>
+            <span style="color:#f5ac31;"><span class="status-macro aui-lozenge aui-lozenge-error">已废弃</span> </span>
+        </span>
+    </span>
+    </h2>
+    <div class="panel" style="background-color:#F5F5F5;">
+        <div class="panelContent" style="background-color:#F5F5F5;">
+            <p class="wiki-content">
+                <span style="color:#333333;">此接口已废弃请勿调用，请联系接口作者 $method.author 获取替代接口 </span>
+            </p>
+        </div>
+    </div>
+    #end
+#end
+
+<h2 class="wiki-content">
+    <span style="color:#008080;">
+        <span style="color:#3366FF;"><span style="color:#666699;"></span>
+            <span style="color:#f52725;"><span class="status-macro aui-lozenge aui-lozenge-error">特殊说明</span> </span>
+        </span>
+    </span>
+</h2>
+<div class="panel" style="background-color:#F5F5F5;">
+    <div class="panelContent" style="background-color:#F5F5F5;">
+        #if(!$method.special.equals(""))
+            <p class="wiki-content">
+                <span style="color:#333333;">$method.special </span>
+            </p>
+
+        #end
+    </div>
+</div>
+
+<h2 class="wiki-content">
+    <span style="color:#008080;">
+        <span style="color:#3366FF;"><span style="color:#666699;"></span>
+            <span style="color:#f5ac31;"><span class="status-macro aui-lozenge aui-lozenge-current">涉及表说明</span> </span>
+        </span>
+    </span>
+</h2>
+<div class="panel" style="background-color:#F5F5F5;">
+    <div class="panelContent" style="background-color:#F5F5F5;">
+        #if(!$method.tables.equals(""))
+            <p class="wiki-content">
+                <span style="color:#333333;">$method.tables </span>
+            </p>
+
+        #end
+    </div>
+</div>
+
+#if(!$method.uri.equals(""))
+<h2 class="wiki-content">
+    <span style="color:#008080;">
+        <span style="color:#3366FF;"><span style="color:#666699;"></span>
+            <span style="color:#f5ac31;"><span class="status-macro aui-lozenge aui-lozenge-current">URI</span> </span>
+        </span>
+    </span>
+</h2>
+<div class="panel" style="background-color:#F5F5F5;">
+    <div class="panelContent" style="background-color:#F5F5F5;">
+        <p class="wiki-content">
+            <span style="color:#333333;">$method.uri </span>
+        </p>
+    </div>
+</div>
+#end
+
+<h2 class="wiki-content">
+    <span style="color:#008080;">
+        <span style="color:#3366FF;"><span style="color:#666699;"></span>
+            <span style="color:#008080;"><span class="status-macro aui-lozenge aui-lozenge-success">接口方法</span> </span>
+
+            #if(!$method.since.equals(""))
+                <span style="color:#333333;">
+                    <span style="color:#008080;">
+                        <span class="status-macro aui-lozenge aui-lozenge-success aui-lozenge-subtle">SINCE $method.since</span>
+                    </span>
+                </span>
+            #end
+
+        </span>
+    </span>
+</h2>
+<div class="panel" style="background-color:#F5F5F5;">
+    <div class="panelContent" style="background-color:#F5F5F5;">
+
+        <h2 class="wiki-content">
+            <span style="color:#333333;">$method.signatureAbbrev</span>
+        </h2>
+
+        <p class="wiki-content">
+            <span style="color:#333333;">接口 ：$method.serviceName</span>
+        </p>
+
+        #if(!$author.equals(""))
+            <p class="wiki-content">
+                <span style="color:#333333;">作者 ：$method.author </span>
+            </p>
+        #end
+
+        #if(!$method.sample.equals(""))
+            <p class="wiki-content">
+                <span style="color:#333333;">示例 ：$method.sample </span>
+            </p>
+        #end
+
+    </div>
+</div>
+
+<h2 class="wiki-content">
+    <span style="color:#008080;">
+        <span style="color:#3366FF;"><span style="color:#666699;"></span>
+            <span style="color:#008080;"><span class="status-macro aui-lozenge aui-lozenge-success">描述</span> </span>
+        </span>
+    </span>
+</h2>
+<div class="panel" style="background-color:#F5F5F5;margin-bottom: 40px;">
+    <div class="panelContent" style="background-color:#F5F5F5;">
+        #if(!$method.description.equals(""))
+            <p class="wiki-content">
+                <span style="color:#333333;">$method.description </span>
+            </p>
+        #end
+    </div>
+</div>
+
+<table width="100%" rules="rows" bordercolor="#C0C0C0" tableframe="below" align="right" cellpadding="10" cellspacing="0"
+       border="none" class="no-border">
+    <tbody>
+    <tr>
+        <th>
+            <h2 class="wiki-content">
+                <span style="color:#008080;">
+                    <span style="color:#3366FF;"><span style="color:#666699;"></span>
+                        <span style="color:#008080;"><span
+                                class="status-macro aui-lozenge aui-lozenge-success">入参</span> </span>
+                    </span>
+                </span>
+            </h2>
+        </th>
+        <th>类型</th>
+        <th>可否为空</th>
+        <th>描述</th>
+    </tr>
+    <tr>
+        <td>$method.paramName</td>
+        <td>$method.paramType</td>
+        <td><span style="color: rgb(255,0,0);">N</span></td>
+        <td>继承自BaseRequest；$method.paramTag</td>
+    </tr>
+    </tbody>
+</table>
+#foreach( $table in $method.paramClassList)
+    #set($row = $table)
+    #parse("table.vm")
+#end
+
+<table width="100%" rules="rows" bordercolor="#C0C0C0" tableframe="below" align="right" cellpadding="10" cellspacing="0"
+       border="none" class="no-border">
+    <tbody>
+    <tr>
+        <th>
+            <h2 class="wiki-content">
+                <span style="color:#008080;">
+                    <span style="color:#3366FF;"><span style="color:#666699;"></span>
+                        <span style="color:#008080;"><span
+                                class="status-macro aui-lozenge aui-lozenge-success">出参</span> </span>
+                    </span>
+                </span>
+            </h2>
+        </th>
+        <th>类型</th>
+        <th>可否为空</th>
+        <th>描述</th>
+    </tr>
+    <tr>
+        <td>出参</td>
+        <td>$method.returnType</td>
+        <td><span style="color: rgb(255,0,0);">N</span></td>
+        <td>继承自BaseResult；$method.returnTag</td>
+    </tr>
+    <tr>
+        <td>sid</td>
+        <td>String</td>
+        <td>Y</td>
+        <td>通用流水号</td>
+    </tr>
+    <tr>
+        <td>code</td>
+        <td>String</td>
+        <td>Y</td>
+        <td>返回码</td>
+    </tr>
+    <tr>
+        <td>description</td>
+        <td>String</td>
+        <td>Y</td>
+        <td>描述</td>
+    </tr>
+    <tr>
+        <td>success</td>
+        <td>Boolean</td>
+        <td><span style="color: rgb(255,0,0);">N</span></td>
+        <td>true:成功,false:失败</td>
+    </tr>
+    #if($method.returnType.contains("PagedResult"))
+        <tr>
+            <td>total</td>
+            <td>Integer</td>
+            <td><span style="color: rgb(255,0,0);">N</span></td>
+            <td>总条数</td>
+        </tr>
+        <tr>
+            <td>totalPage</td>
+            <td>Integer</td>
+            <td><span style="color: rgb(255,0,0);">N</span></td>
+            <td>总页数</td>
+        </tr>
+        <tr>
+            <td>currentPage</td>
+            <td>Integer</td>
+            <td><span style="color: rgb(255,0,0);">N</span></td>
+            <td>当前页数</td>
+        </tr>
+        <tr>
+            <td>pageSize</td>
+            <td>Integer</td>
+            <td><span style="color: rgb(255,0,0);">N</span></td>
+            <td>当前分页大小</td>
+        </tr>
+    #end
+    </tbody>
+</table>
+
+#foreach( $table in $method.returnClassList)
+    #set($row = $table)
+    #parse("table.vm")
+#end
+
+

@@ -1,0 +1,72 @@
+<h2 class="wiki-content">
+    <span style="color:#008080;">
+        <span style="color:#3366FF;"><span style="color:#666699;"></span>
+            <span style="color:#008080;"><span class="status-macro aui-lozenge aui-lozenge-success">POM依赖</span> </span>
+            #if(!$version.equals(""))
+                <span style="color:#333333;">
+                    <span style="color:#008080;">
+                        <span class="status-macro aui-lozenge aui-lozenge-success aui-lozenge-subtle">SNAPSHOT</span>
+                    </span>
+                </span>
+            #end
+        </span>
+    </span>
+</h2>
+<div class="panel" style="background-color:#F5F5F5;font-weight:bold; color: #ec9422">
+    <div class="codeContent panelContent pdl">
+                <pre class="syntaxhighlighter-pre"
+                     data-syntaxhighlighter-params="brush: xml; gutter: false; theme: Confluence"
+                     data-theme="Confluence">$pom</pre>
+    </div>
+</div>
+
+<h2 class="wiki-content">
+    <span style="color:#008080;">
+        <span style="color:#3366FF;"><span style="color:#666699;"></span>
+            <span style="color:#008080;"><span class="status-macro aui-lozenge aui-lozenge-success">描述</span> </span>
+        </span>
+    </span>
+</h2>
+<div class="panel" style="background-color:#F5F5F5;">
+    <div class="panelContent" style="background-color:#F5F5F5;">
+
+        #if(!$interfaceDesc.equals(""))
+            <p class="wiki-content">
+                <span style="color:#333333;">$interfaceDesc </span>
+            </p>
+        #end
+
+    </div>
+</div>
+
+<h2 class="wiki-content">
+    <span style="color:#008080;">
+        <span style="color:#3366FF;"><span style="color:#666699;"></span>
+            <span style="color:#008080;"><span class="status-macro aui-lozenge aui-lozenge-success">接口信息</span> </span>
+            #if(!$interfaceSince.equals(""))
+                <span style="color:#333333;">
+                    <span style="color:#008080;">
+                        <span class="status-macro aui-lozenge aui-lozenge-success aui-lozenge-subtle">SNICE $interfaceSince</span>
+                    </span>
+                </span>
+            #end
+        </span>
+    </span>
+</h2>
+<div class="panel" style="background-color:#F5F5F5;">
+    <div class="panelContent" style="background-color:#F5F5F5;">
+        <p class="wiki-content">
+            <span style="color:#333333;">签名 ：$interfaceName</span>
+        </p>
+
+        #if(!$interfaceAuthor.equals(""))
+            <p class="wiki-content">
+                <span style="color:#333333;">作者 ：$interfaceAuthor </span>
+            </p>
+        #end
+
+        <p class="wiki-content">
+            <span style="color:#333333;">更新日期 ：$updateYmd </span>
+        </p>
+    </div>
+</div>

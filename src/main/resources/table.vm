@@ -1,0 +1,52 @@
+<div>
+    <style>
+        table tr th, td {
+            padding: 12px 0;
+            min-width: 0;
+            box-sizing: border-box;
+            text-overflow: ellipsis;
+            vertical-align: middle;
+            position: relative;
+            text-align: left;
+            border: 0;
+            border-bottom: 1px solid #ebeef5;
+        }
+    </style>
+
+    <table width="100%" rules="rows" bordercolor="#C0C0C0" tableframe="below" align="right" cellpadding="10" cellspacing="0"
+           border="none" class="no-border">
+        <tbody>
+        <tr>
+            <th>$row.simpleName</th>
+            <th>类型</th>
+            <th>可否为空</th>
+            <th>描述</th>
+        </tr>
+            #foreach( $cell in $row.fields)
+            <tr>
+                <td>
+                    #if(!$cell.name.equals(""))
+                    $cell.name
+                #end
+                </td>
+                <td>
+                    #if(!$cell.type.equals(""))
+                    $cell.type
+                #end
+                </td>
+                <td>
+                    #if(!$cell.canBeEmpty.equals(""))
+                        #if($cell.canBeEmpty.equals("true"))Y #else <span style="color: rgb(255,0,0);">N</span>
+                        #end
+                    #end
+                </td>
+                <td>
+                    #if(!$cell.description.equals(""))
+                    $cell.description
+                #end
+                </td>
+            </tr>
+            #end
+        </tbody>
+    </table>
+</div>
